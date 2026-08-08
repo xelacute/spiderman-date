@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070912">
+<title>A Very Important Question ❤️</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Patrick+Hand&display=swap');
+
+:root{
+  --bg:#070912; --bg2:#0f1422; --red:#e92d45; --red-dark:#a9162b;
+  --blue:#18356f; --blue2:#4c76d8; --white:#fff8f4; --muted:#b7bdca;
+  --card:rgba(255,255,255,.075); --line:rgba(255,255,255,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#fff;font-family:"DM Sans",Arial,sans-serif;overflow-x:hidden}
+button{font:inherit;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+.page{
+  min-height:100svh; display:none; align-items:center; justify-content:center;
+  position:relative; overflow:hidden; padding:30px 18px 44px;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(233,45,69,.22),transparent 29%),
+    radial-gradient(circle at 92% 82%,rgba(24,53,111,.48),transparent 34%),
+    linear-gradient(145deg,#05070d,#111625 57%,#070910);
+}
+.page.active{display:flex;animation:pageIn .55s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.content{width:min(760px,100%);position:relative;z-index:3;text-align:center}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.08;margin:12px 0}
+h1{font-size:clamp(2.8rem,11vw,5.8rem)}
+h2{font-size:clamp(2.15rem,8.5vw,4.3rem)}
+h3{font-size:1.7rem}
+p{color:#d9dce5;line-height:1.75}
+.red{color:#ff536a}.blue{color:#7696ed}
+.eyebrow{font-size:.67rem;letter-spacing:.22em;text-transform:uppercase;color:#ff9eaa;font-weight:800}
+.hand{font-family:"Patrick Hand",cursive;color:#ff8796;font-size:1.35rem}
+.small{font-size:.76rem;color:var(--muted)}
+
+.web{
+  position:absolute;width:430px;height:430px;border:1px solid rgba(255,255,255,.13);
+  border-radius:50%;opacity:.65;pointer-events:none;
+}
+.web:before,.web:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.1);border-radius:50%}
+.web:before{inset:12%}.web:after{inset:28%;box-shadow:0 0 0 35px transparent,0 0 0 36px rgba(255,255,255,.08),0 0 0 73px transparent,0 0 0 74px rgba(255,255,255,.055)}
+.web.one{right:-235px;top:-180px;transform:rotate(22deg)}
+.web.two{left:-250px;bottom:-210px;transform:rotate(-18deg)}
+
+.spider{
+  width:78px;height:78px;border-radius:50%;margin:0 auto 20px;
+  display:grid;place-items:center;font-size:43px;
+  background:linear-gradient(145deg,var(--red),var(--red-dark));
+  box-shadow:0 16px 42px rgba(233,45,69,.28);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-8px) rotate(3deg)}}
+
+.btn{
+  border:0;border-radius:999px;padding:15px 22px;font-weight:800;cursor:pointer;
+  transition:transform .18s ease,filter .18s ease,background .18s ease;
+}
+.btn:active{transform:scale(.96)}
+.btn-primary{background:var(--red);color:#fff;box-shadow:0 13px 30px rgba(233,45,69,.28)}
+.btn-secondary{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line)}
+.btn-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:25px}
+
+.glass{
+  background:var(--card);border:1px solid var(--line);border-radius:27px;
+  padding:26px;box-shadow:0 25px 70px rgba(0,0,0,.42);backdrop-filter:blur(14px);
+}
+.letter{
+  background:var(--white);color:#1b1b22;border-radius:20px;padding:24px;
+  text-align:left;box-shadow:0 20px 55px rgba(0,0,0,.38);transform:rotate(-.7deg);
+}
+.letter p{color:#3e3d45;margin:9px 0}
+.signature{font-family:"Patrick Hand",cursive;font-size:1.45rem;color:var(--red-dark);text-align:right}
+
+.ticket{
+  background:var(--white);color:#171820;border-radius:23px;padding:22px;text-align:left;
+  box-shadow:0 20px 55px rgba(0,0,0,.45);position:relative;overflow:hidden;
+}
+.ticket:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(135deg,transparent 0 13px,rgba(233,45,69,.035) 14px 15px)}
+.ticket h3{color:var(--red-dark)}
+.ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.info{background:#f3e5e1;border-radius:14px;padding:12px}
+.info small{display:block;color:#8d747b;font-size:.61rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.info strong{font-size:.86rem}
+
+.reason{
+  text-align:left;background:rgba(255,255,255,.055);border:1px solid transparent;
+  padding:16px;border-radius:17px;margin:9px 0;cursor:pointer;transition:.2s;
+}
+.reason:hover,.reason.open{background:rgba(233,45,69,.09);border-color:rgba(233,45,69,.35)}
+.reason-title{font-weight:800}
+.reason-answer{display:none;color:#d4d8e2;font-size:.88rem;line-height:1.6;margin-top:8px}
+.reason.open .reason-answer{display:block}
+
+.choices{max-width:440px;margin:20px auto 0;display:grid;gap:12px}
+.choice{
+  width:100%;padding:17px 18px;text-align:left;border-radius:19px;
+  background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--line);cursor:pointer;
+  transition:.2s;
+}
+.choice:hover{transform:translateY(-2px);background:rgba(233,45,69,.11);border-color:rgba(233,45,69,.45)}
+.choice span{display:block;color:var(--muted);font-size:.76rem;font-weight:500;margin-top:5px}
+.choice.no{position:relative}
+
+.success-box{
+  margin-top:20px;padding:23px;border-radius:25px;
+  background:linear-gradient(145deg,rgba(233,45,69,.14),rgba(24,53,111,.22));
+  border:1px solid var(--line);
+}
+.step{text-align:left;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+.step b{color:#ff6d7e;margin-right:7px}
+
+.progress{
+  position:fixed;top:0;left:0;width:100%;height:4px;background:rgba(255,255,255,.08);z-index:50;
+}
+.progress i{display:block;height:100%;width:12.5%;background:var(--red);transition:width .45s ease}
+
+.toast{
+  position:fixed;left:50%;bottom:22px;z-index:80;max-width:90%;
+  transform:translate(-50%,25px);opacity:0;pointer-events:none;
+  background:#fff;color:#15161d;padding:13px 17px;border-radius:15px;
+  font-size:.86rem;font-weight:800;box-shadow:0 15px 40px rgba(0,0,0,.55);transition:.25s;
+  text-align:center;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:70;overflow:hidden}
+.piece{position:absolute;top:-35px;animation:drop linear forwards}
+@keyframes drop{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+
+@media(max-width:560px){
+  .page{padding:24px 16px 38px}
+  .spider{width:68px;height:68px;font-size:38px}
+  .glass{padding:21px 17px;border-radius:22px}
+  .ticket{padding:19px}.ticket-grid{grid-template-columns:1fr}
+  .btn-row{flex-direction:column}.btn-row .btn{width:100%}
+  h1{font-size:2.85rem}
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><i id="bar"></i></div>
+
+<section class="page active" id="p1">
+  <div class="web one"></div><div class="web two"></div>
+  <div class="content">
+    <div class="spider">🕷️</div>
+    <div class="eyebrow">TOP SECRET • FOR YOU ONLY</div>
+    <h1>Hey, <span class="red">love.</span></h1>
+    <p>I made you a little something.<br>It has a question at the end, so please don't skip ahead. 😭❤️</p>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">OPEN YOUR SURPRISE →</button></div>
+    <div class="small" style="margin-top:16px">Yes, I really made a whole website for this. 😂</div>
+  </div>
+</section>
+
+<section class="page" id="p2">
+  <div class="web one"></div>
+  <div class="content">
+    <div class="eyebrow">A little message before the question</div>
+    <h2>First… I want you to know something. ❤️</h2>
+    <div class="letter">
+      <p>I'm really happy that I get to have little moments with you.</p>
+      <p>It doesn't have to be anything fancy. Sometimes it's just talking, laughing at random things, eating together, or being beside each other.</p>
+      <p>And since you're going to <strong>leave the province soon</strong>, I thought maybe we could make one more little memory together. 🥺</p>
+      <p>Something simple. Something fun. Something that is just <strong>ours.</strong></p>
+      <div class="signature">— your girl ❤️</div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">KEEP READING… 👀</button></div>
+  </div>
+</section>
+
+<section class="page" id="p3">
+  <div class="web two"></div>
+  <div class="content">
+    <div class="eyebrow">DATE MISSION</div>
+    <h2>I have a mission for you. 🕷️</h2>
+    <p>And before you ask… yes, there is food involved.</p>
+    <div class="ticket">
+      <div class="eyebrow" style="color:#a9162b">OFFICIAL MOVIE DATE PASS</div>
+      <h3>Spider-Man: Brand New Day</h3>
+      <div class="ticket-grid">
+        <div class="info"><small>DATE</small><strong>August 14 📅</strong></div>
+        <div class="info"><small>PLACE</small><strong>Robinsons Naga Cinema 📍</strong></div>
+        <div class="info"><small>TICKETS</small><strong>My treat 🍿</strong></div>
+        <div class="info"><small>DRESS CODE</small><strong>Look handsome. 😌</strong></div>
+      </div>
+    </div>
+    <p class="hand">Your only mission is to look nice, dress nice, and show up with me. 😂❤️</p>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">ACCEPT THE MISSION 🕷️</button></div>
+  </div>
+</section>
+
+<section class="page" id="p4">
+  <div class="web one"></div>
+  <div class="content">
+    <div class="eyebrow">Tap each one 👇</div>
+    <h2>Why do I want you there?</h2>
+    <p>I'm giving you four completely serious reasons. Probably.</p>
+
+    <div class="reason" onclick="this.classList.toggle('open')">
+      <div class="reason-title">01 — Because I want more time with you. 🥺</div>
+      <div class="reason-answer">Even when we've already spent time together, I still somehow feel like it wasn't enough. So yes, I'm asking for a few more hours. Hehe.</div>
+    </div>
+    <div class="reason" onclick="this.classList.toggle('open')">
+      <div class="reason-title">02 — Because movies are better with you. 🍿</div>
+      <div class="reason-answer">I want to hear you react, laugh at the funny parts with you, and probably steal some of your snacks even though I'm the one treating. 😭</div>
+    </div>
+    <div class="reason" onclick="this.classList.toggle('open')">
+      <div class="reason-title">03 — Because I want another memory. ❤️</div>
+      <div class="reason-answer">Later on, I want us to remember this tiny date and say, “Remember when we went to see Spider-Man together?”</div>
+    </div>
+    <div class="reason" onclick="this.classList.toggle('open')">
+      <div class="reason-title">04 — Because I love you. That's the real reason. 🥹</div>
+      <div class="reason-answer">Case closed. No objections accepted. Thank you for attending my TED Talk. 😂❤️</div>
+    </div>
+
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">THERE'S MORE… 💌</button></div>
+  </div>
+</section>
+
+<section class="page" id="p5">
+  <div class="web two"></div>
+  <div class="content">
+    <div class="eyebrow">A love letter, but make it a website</div>
+    <h2>For you, my love.</h2>
+    <div class="letter">
+      <p>I just want to spend a little time with you, watch a movie together, laugh together, eat some snacks, and make another little memory with you before you leave the province🥺.</p>
+      <p>I love you so much, and honestly, watching Spider-Man would be even better if I get to watch it beside you.</p>
+      <p>It isn't really just about the movie. It's about getting to sit beside you, sharing snacks, laughing together, and having those little moments that I know I'll miss when you're gone.</p>
+      <p>So let me take you out. Let me spoil you for a few hours. You don't need to plan anything.</p>
+      <p><strong>You just need to show up and be my handsome date.</strong> 😂❤️</p>
+      <div class="signature">I love you so much. ❤️</div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">OKAY… NOW THE ACTUAL QUESTION 🥺</button></div>
+  </div>
+</section>
+
+<section class="page" id="p6">
+  <div class="web one"></div><div class="web two"></div>
+  <div class="content">
+    <div class="eyebrow">FINAL QUESTION</div>
+    <h1>Will you watch<br><span class="red">Spider-Man</span><br>with me?</h1>
+    <p><strong>August 14</strong> • Robinsons Naga Cinema • <strong>My treat</strong> 🍿</p>
+    <div class="choices">
+      <button class="choice" onclick="sayYes()">
+        ❤️ <strong>YES, I'LL GO WITH YOU 🥺</strong>
+        <span>Obviously the correct answer.</span>
+      </button>
+      <button class="choice no" id="noBtn" onclick="sayNo()">
+        🤔 <strong>Hmm… let me think</strong>
+        <span>I'm going to regret giving you this button.</span>
+      </button>
+    </div>
+    <div class="small" id="noMessage" style="margin-top:15px">Choose wisely. I am emotionally invested in this. 😭</div>
+  </div>
+</section>
+
+<section class="page" id="p7">
+  <div class="web one"></div><div class="web two"></div>
+  <div class="content">
+    <div style="font-size:56px">🕷️❤️🍿</div>
+    <div class="eyebrow">MISSION ACCEPTED</div>
+    <h1>YAY!<br><span class="red">IT'S A DATE!</span></h1>
+    <p>I knew you were smart. 😌</p>
+    <div class="success-box">
+      <div class="hand">Your official responsibilities:</div>
+      <div style="max-width:430px;margin:8px auto 0">
+        <div class="step"><b>01.</b> Look handsome.</div>
+        <div class="step"><b>02.</b> Dress nice.</div>
+        <div class="step"><b>03.</b> Show up.</div>
+        <div class="step"><b>04.</b> Let me spoil you. ❤️</div>
+      </div>
+      <p style="margin-bottom:0">Everything else? <strong>I got you.</strong></p>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextPage()">ONE LAST MESSAGE… 💌</button></div>
+  </div>
+</section>
+
+<section class="page" id="p8">
+  <div class="web two"></div>
+  <div class="content">
+    <div class="eyebrow">THE END… FOR NOW</div>
+    <h2>I love you, my love. ❤️</h2>
+    <div class="letter">
+      <p>See you at the movies.</p>
+      <p>Thank you for saying yes to another little adventure with me.</p>
+      <p>I'll bring the tickets, the snacks, and probably an unreasonable amount of excitement. 😂</p>
+      <p>Let's laugh, eat, watch Spider-Man, and just enjoy being together.</p>
+      <p><strong>Your Spider-Man movie date is officially booked…</strong></p>
+      <div class="signature">well, at least in my heart. hehe. ❤️</div>
+    </div>
+    <p class="hand">P.S. You better look handsome. I warned you. 😌🕷️</p>
+    <div class="btn-row"><button class="btn btn-secondary" onclick="restart()">↻ Read it again</button></div>
+  </div>
+</section>
+
+<div class="toast" id="toast"></div>
+<div class="confetti" id="confetti"></div>
+
+<script>
+let page=1;
+let noClicks=0;
+const total=8;
+
+function showPage(n){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById("p"+n).classList.add("active");
+  page=n;
+  document.getElementById("bar").style.width=(n/total*100)+"%";
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+function nextPage(){ showPage(Math.min(page+1,total)); }
+
+function restart(){
+  noClicks=0;
+  document.getElementById("noMessage").textContent="Choose wisely. I am emotionally invested in this. 😭";
+  document.getElementById("noBtn").style.transform="";
+  showPage(1);
+}
+
+function showToast(text){
+  const t=document.getElementById("toast");
+  t.textContent=text;
+  t.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+function sayNo(){
+  noClicks++;
+  const messages=[
+    "Hmm? 🤨 I don't remember giving you that option.",
+    "Nice try, love. 😭❤️",
+    "The button is getting nervous. You should just say yes. 😂",
+    "Okay fine… I'm asking again. PLEASE? 🥺",
+    "At this point, the answer is yes. Come here. 😭❤️"
+  ];
+  const msg=messages[Math.min(noClicks-1,messages.length-1)];
+  document.getElementById("noMessage").textContent=msg;
+  showToast(msg);
+
+  const btn=document.getElementById("noBtn");
+  if(noClicks<4){
+    const x=(Math.random()*100-50);
+    const y=(Math.random()*70-35);
+    btn.style.transform=`translate(${x}px,${y}px) rotate(${Math.random()*8-4}deg)`;
+  }else{
+    setTimeout(sayYes,500);
+  }
+}
+
+function sayYes(){
+  showPage(7);
+  celebrate();
+}
+
+function celebrate(){
+  const box=document.getElementById("confetti");
+  const things=["❤️","🕷️","💙","🍿","✨","🕸️","🥺","💕"];
+  for(let i=0;i<75;i++){
+    const el=document.createElement("span");
+    el.className="piece";
+    el.textContent=things[Math.floor(Math.random()*things.length)];
+    el.style.left=(Math.random()*100)+"%";
+    el.style.animationDuration=(3+Math.random()*4)+"s";
+    el.style.animationDelay=(Math.random()*1.2)+"s";
+    el.style.fontSize=(15+Math.random()*18)+"px";
+    box.appendChild(el);
+    setTimeout(()=>el.remove(),8500);
+  }
+  showToast("YAY!!! IT'S A DATE! 🕷️❤️🍿");
+}
+</script>
+</body>
+</html>
